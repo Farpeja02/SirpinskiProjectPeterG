@@ -1,33 +1,33 @@
 import random
 import turtle
 
-s = turtle.getscreen()
-t = turtle.Turtle()
-t.hideturtle()
-t.speed(100000)
+screen = turtle.getscreen()
+turtleObj = turtle.Turtle()
+turtleObj.hideturtle()
+turtleObj.speed(100000)
 turtle.screensize(0,800)
-i = 0
+
 amountOfCorners = 3
 listOfCorners = []
 
-class ObejctOnScreen:
+class ObjectOnScreen:
 
     def __init__(self):
         self.x = random.randint(0,400)
         self.y = random.randint(0,400)
     def DrawObj(self):
-        t.goto(self.x,self.y)
-        t.dot(3)
+        turtleObj.goto(self.x, self.y)
+        turtleObj.dot(3)
 
 
 def GenerateStartDots():
         global amountOfCorners
         for x in range(amountOfCorners):
-            listOfCorners.append(ObejctOnScreen())
+            listOfCorners.append(ObjectOnScreen())
 
 def GenerateStartObj():
     global startObj
-    startObj = ObejctOnScreen()
+    startObj = ObjectOnScreen()
 
 def CycleOfDrawing():
     startObj.DrawObj()
@@ -40,18 +40,19 @@ def ChangeObj():
 
 GenerateStartDots()
 
-c = 0
+controlPenUp = 0
 for corner in listOfCorners * 2:
-    if c == 0:
-        t.penup()
+    if controlPenUp == 0:
+        turtleObj.penup()
     else:
-        t.pendown()
-    t.goto(corner.x,corner.y)
-    c += 1
-t.penup()
+        turtleObj.pendown()
+    turtleObj.goto(corner.x, corner.y)
+    controlPenUp += 1
+turtleObj.penup()
 
 GenerateStartObj()
-while i < 100000:
+AmountOfRounds = 0
+while AmountOfRounds < 100000:
     ChangeObj()
     CycleOfDrawing()
-    i =+1
+    AmountOfRounds =+1
